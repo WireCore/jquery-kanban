@@ -4,6 +4,11 @@
 
 		var board = "";
 		
+		var test = `
+			<div>${tesdt123()}</div> 
+		`;
+		console.log(test);
+		
 		$(options['lists']).each(function(index,value){
 			board += '<div class="kanban-list">';
 			board += '<div class="kanban-list-header"><span class="kanban-list-title">'+value['title']+'</span><button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button></div>';
@@ -126,3 +131,7 @@
 	};
 
 }(jQuery));
+
+function tesdt123(){
+	return "<p>123456789</p>";
+}
