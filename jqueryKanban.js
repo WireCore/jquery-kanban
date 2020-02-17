@@ -2,86 +2,11 @@
 	
 	$.fn.jqueryKanban = function(options){
 
-		var board = "";
+		var board = createKanbanboard();
 		
-		var test = `
-			<div>${tesdt123()}</div> 
-		`;
-		console.log(test);
+		this.append(board);
 		
-		$(options['lists']).each(function(index,value){
-			board += '<div class="kanban-list">';
-			board += '<div class="kanban-list-header"><span class="kanban-list-title">'+value['title']+'</span><button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button></div>';
-			
-			$(value['cards']).each(function(index1,value1){
-				board += '<div class="kanban-item">';
-				
-				// wenn bild vorhanden ist
-				if(typeof value1['image'] !== 'undefined'){
-					board += '<div class="kanban-item-row"><img src="'+value1['image']+'" class="kanban-item-image" /></div>';
-				}
-				
-				// wenn labels vorhanden sind
-				if(typeof value1['labels'] !== 'undefined' && Array.isArray(value1['labels'])){
-					
-					board += '<div class="kanban-item-row">';
-					
-					$(value1['labels']).each(function(index_label,value_label){
-						
-						board += '<span class="kanban-item-label" style="background-color:'+value_label['color']+';"></span>';
-						
-					});
-					
-					board += '</div>';
-				
-				}
-				
-				board += '<div class="kanban-item-row">'+value1['title']+'</div>';
-				
-				board += '<div class="kanban-item-row">';
-				
-				// wenn eine beschreibung vorhanden ist
-				if(typeof value1['description'] !== 'undefined' && value1['description'] == true){
-					board += '<span class="kanban-item-icon"><i class="fas fa-align-left"></i></span>';
-				}
-				
-				// wenn attachement vorhanden sind
-				if(typeof value1['attachements'] !== 'undefined' && value1['attachements'] > 0){
-					board += '<span class="kanban-item-icon"><i class="fas fa-paperclip"></i> '+value1['attachements']+'</span>';
-				}
-				
-				// wenn comments vorhanden sind
-				if(typeof value1['comments'] !== 'undefined' && value1['comments'] > 0){
-					board += '<span class="kanban-item-icon"><i class="far fa-comment"></i> '+value1['comments']+'</span>';
-				}
-				
-				// wenn checklisten vorhanden sind
-				if(typeof value1['checklist'] !== 'undefined'){
-					board += '<span class="kanban-item-icon"><i class="far fa-check-square"></i> '+value1['checklist']+'</span>';
-				}
-				
-				// wenn eigene Icons vorhanden sind
-				if(typeof value1['customIcons'] !== 'undefined'){
-					
-					$(value1['customIcons']).each(function(ci,customIcon){
-						
-						board += '<span class="kanban-item-icon">' + customIcon['icon'] + " " + customIcon['text'] + '</span>';
-						
-					});
-					
-				}
-				
-				board += '</div>';
-				
-				board += '</div>';
-			});
-			
-			board += '<div class="kanban-list-footer"><button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button></div>';
-			
-			board += '</div>';
-			
-		});
-		
+		// handler
 		$(function(){
 			$('.kanban-list-footer-button').click(function(e){
 				if(options.clickFooterButtonHandler !== undefined) {
@@ -100,12 +25,8 @@
 			});
 		});
 		
-		this.append(board);
-		this.addClass('kanbanboard');
-		
-		// activate sortable
 		$(function(){
-			$(".kanban-list").sortable({
+			$(".kanbanboard-list").sortable({
 				items: ".kanban-item",
 				update: function(event,ui){
 					if(options.sortCardHandler !== undefined) {
@@ -114,8 +35,8 @@
 				}
 			});
 			$(".kanban-list").disableSelection();
-			$("#kanbanboard").sortable({
-				items: ".kanban-list",
+			$(".kanbanboard-container").sortable({
+				items: ".kanbanboard-list",
 				handle: ".kanban-list-header",
 				update: function(event,ui){
 					if(options.sortListHandler !== undefined) {
@@ -123,15 +44,138 @@
 					}
 				}
 			});
-			$(".kanbanboard").disableSelection();
+			$(".kanbanboard-container").disableSelection();
 		});
 		
 		return this;
-
+		
+		function createKanbanboard(){
+			
+			var kanbanboard = `
+				<div class="kanbanboard">
+					<div class="kanbanboard-inline">
+						<div class="kanbanboard-container">
+							${createLists()}
+						</div>
+					</div>
+				</div>
+			`;
+			
+			return kanbanboard;
+			
+		}
+		
+		function createLists(){
+			
+			var lists = "";
+			$(options['lists']).each(function(index,value){
+				lists += createList(value);
+			});
+			
+			return lists;
+		}
+		
+		function createList(list){
+			
+			var listHtml = `
+				<div class="kanbanboard-list">
+					<div class="kanban-list-header">
+						<div class="kanban-list-title">
+							${list.title}
+						</div>
+						<div class="kanban-list-header-button">
+							<button class="kanban-list-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+					</div>
+					<div class="kanban-list-content">
+						${createListContent(list.cards)}
+					</div>
+					<div class="kanban-list-footer">
+						<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
+					</div>
+				</div>
+			`;
+			
+			return listHtml;
+			
+		}
+		
+		function createListContent(cards){
+			
+			var cardsHtml = "";
+			
+			$(cards).each(function(index,value){
+				cardsHtml += createCard(value);
+			});
+			
+			return cardsHtml;
+			
+		}
+		
+		function createCard(card){
+			
+			var cardHtml = '<div class="kanban-item">';
+			
+			if(typeof card.image !== 'undefined'){
+				cardHtml += createCardImage(card.image);
+			}
+			
+			if(typeof card['labels'] !== 'undefined' && Array.isArray(card['labels'])){
+				
+				cardHtml += '<div class="kanban-item-row">';
+				
+				$(card['labels']).each(function(index,value){
+					cardHtml += createCardLabel(value);
+				});
+				
+				cardHtml += '</div>';
+				
+			}
+			
+			if(typeof card.title !== 'undefined'){
+				cardHtml += createCardTitle(card.title);
+			}
+			
+			if(typeof card['customIcons'] !== 'undefined'){
+				
+				cardHtml += '<div class="kanban-item-row">';
+				
+				$(card['customIcons']).each(function(index,value){
+					cardHtml += createCardIcon(value.icon,value.text);
+				});
+				
+				cardHtml += '</div>';
+				
+			}
+			
+			cardHtml += '</div>';
+			
+			return cardHtml;
+			
+		}
+		
+		function createCardImage(image){
+			return `<div class="kanban-item-row">
+						<img src="${image}" class="kanban-item-image" />
+					</div>`;
+		}
+		
+		function createCardLabel(label){
+			return `<span class="kanban-item-label" style="background-color:${label.color};"></span>`;
+		}
+		
+		function createCardTitle(title){
+			return `
+				<div class="kanban-item-row">${title}</div>
+			`;
+		}
+		
+		function createCardIcon(icon,text){
+			return `<span class="kanban-item-icon">${icon} ${text}</span>`;
+		}
+		
 	};
+	
+	
 
 }(jQuery));
-
-function tesdt123(){
-	return "<p>123456789</p>";
-}

@@ -9,181 +9,158 @@
 		<script src="../jqueryKanban.js"></script>
 	</head>
 	<body>
-		<div id="kanbanboard" class="kanbanboard">
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-item">
-					<div class="kanban-item-row">
-						<img src="../images/test1.jpg" class="kanban-item-image" />
-					</div>
-					<div class="kanban-item-row">
-						<span class="kanban-item-label"></span>
-						<span class="kanban-item-label"></span>
-						<span class="kanban-item-label"></span>
-						<span class="kanban-item-label"></span>
-					</div>
-					<div class="kanban-item-row">Card 2 Title</div>
-					<div class="kanban-item-row">
-						<span class="kanban-item-icon"><i class="fas fa-align-left"></i></span>
-						<span class="kanban-item-icon"><i class="fas fa-paperclip"></i> 1</span>
-						<span class="kanban-item-icon"><i class="far fa-comment"></i> 2</span>
-						<span class="kanban-item-icon"><i class="far fa-check-square"></i> 1/3</span>
-					</div>
-				</div>
-				<div class="kanban-item">Card 3</div>
-				<div class="kanban-item">Card 4</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-item">
-					<div class="kanban-item-row">
-						<img src="../images/test1.jpg" class="kanban-item-image" />
-					</div>
-					<div class="kanban-item-row">
-						<span class="kanban-item-label"></span>
-						<span class="kanban-item-label"></span>
-						<span class="kanban-item-label"></span>
-						<span class="kanban-item-label"></span>
-					</div>
-					<div class="kanban-item-row">Card 2 Title</div>
-					<div class="kanban-item-row">
-						<span class="kanban-item-icon"><i class="fas fa-align-left"></i></span>
-						<span class="kanban-item-icon"><i class="fas fa-paperclip"></i> 1</span>
-						<span class="kanban-item-icon"><i class="far fa-comment"></i> 2</span>
-						<span class="kanban-item-icon"><i class="far fa-check-square"></i> 1/3</span>
-					</div>
-				</div>
-				<div class="kanban-item">
-					<div class="kanban-item-row">
-						<span class="kanban-item-label" style="background: blue;"></span>
-						<span class="kanban-item-label" style="background: red;"></span>
-					</div>
-				</div>
-				<div class="kanban-item">
-					<div class="kanban-item-row">
-							<div class="kanban-item-row">
-							<img src="../images/test1.jpg" class="kanban-item-image" />
+		<div class="kanbanboard">
+			<div class="kanbanboard-inline">
+				<div class="kanbanboard-container">
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<div class="kanban-list-title">List 1 Title</div>
+							<div class="kanban-list-header-button">
+								<button class="kanban-list-button"><i class="fas fa-ellipsis-h"></i></button>
+							</div>
+						</div>
+						<div class="kanban-item">Card 1</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
 						</div>
 					</div>
-				</div>
-				<div class="kanban-item">
-					<div class="kanban-item-row">
-							<div class="kanban-item-row">
-							<img src="../images/test1.jpg" class="kanban-item-image" />
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<span class="kanban-list-title">List 1 Title</span>
+							<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+						<div class="kanban-list-content">
+							<div class="kanban-item">Card 1</div>
+							<div class="kanban-item">
+								<div class="kanban-item-row">
+									<img src="../images/test1.jpg" class="kanban-item-image" />
+								</div>
+								<div class="kanban-item-row">
+									<span class="kanban-item-label"></span>
+									<span class="kanban-item-label"></span>
+									<span class="kanban-item-label"></span>
+									<span class="kanban-item-label"></span>
+								</div>
+								<div class="kanban-item-row">Card 2 Title</div>
+								<div class="kanban-item-row">
+									<span class="kanban-item-icon"><i class="fas fa-align-left"></i></span>
+									<span class="kanban-item-icon"><i class="fas fa-paperclip"></i> 1</span>
+									<span class="kanban-item-icon"><i class="far fa-comment"></i> 2</span>
+									<span class="kanban-item-icon"><i class="far fa-check-square"></i> 1/3</span>
+								</div>
+							</div>
+							<div class="kanban-item">
+								<div class="kanban-item-row">
+									<span class="kanban-item-label" style="background: blue;"></span>
+									<span class="kanban-item-label" style="background: red;"></span>
+								</div>
+							</div>
+							<div class="kanban-item">
+								<div class="kanban-item-row">
+										<div class="kanban-item-row">
+										<img src="../images/test1.jpg" class="kanban-item-image" />
+									</div>
+								</div>
+							</div>
+							<div class="kanban-item">
+								<div class="kanban-item-row">
+										<div class="kanban-item-row">
+										<img src="../images/test1.jpg" class="kanban-item-image" />
+									</div>
+								</div>
+							</div>
+							<div class="kanban-item">
+								<div class="kanban-item-row">
+										<div class="kanban-item-row">
+										<img src="../images/test1.jpg" class="kanban-item-image" />
+									</div>
+								</div>
+							</div>
+							<div class="kanban-item">
+								<div class="kanban-item-row">
+										<div class="kanban-item-row">
+										<img src="../images/test1.jpg" class="kanban-item-image" />
+									</div>
+								</div>
+							</div>
+							<div class="kanban-item">Card 4</div>
+						</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
 						</div>
 					</div>
-				</div>
-				<div class="kanban-item">
-					<div class="kanban-item-row">
-							<div class="kanban-item-row">
-							<img src="../images/test1.jpg" class="kanban-item-image" />
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<span class="kanban-list-title">List 1 Title</span>
+							<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+						<div class="kanban-item">Card 1</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
 						</div>
 					</div>
-				</div>
-				<div class="kanban-item">
-					<div class="kanban-item-row">
-							<div class="kanban-item-row">
-							<img src="../images/test1.jpg" class="kanban-item-image" />
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<span class="kanban-list-title">List 1 Title</span>
+							<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+						<div class="kanban-item">Card 1</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
 						</div>
 					</div>
-				</div>
-				<div class="kanban-item">Card 4</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
-				</div>
-			</div>
-			<div class="kanban-list">
-				<div class="kanban-list-header">
-					<span class="kanban-list-title">List 1 Title</span>
-					<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
-				</div>
-				<div class="kanban-item">Card 1</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<span class="kanban-list-title">List 1 Title</span>
+							<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+						<div class="kanban-item">Card 1</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
+						</div>
+					</div>
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<span class="kanban-list-title">List 1 Title</span>
+							<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+						<div class="kanban-item">Card 1</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
+						</div>
+					</div>
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<span class="kanban-list-title">List 1 Title</span>
+							<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+						<div class="kanban-item">Card 1</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
+						</div>
+					</div>
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<span class="kanban-list-title">List 1 Title</span>
+							<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+						<div class="kanban-item">Card 1</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
+						</div>
+					</div>
+					<div class="kanbanboard-list">
+						<div class="kanban-list-header">
+							<span class="kanban-list-title">List 1 Title</span>
+							<button class="kanban-list-button kanban-list-header-button"><i class="fas fa-ellipsis-h"></i></button>
+						</div>
+						<div class="kanban-item">Card 1</div>
+						<div class="kanban-list-footer">
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<br>
 	</body>
 </html>
