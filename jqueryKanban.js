@@ -92,7 +92,7 @@
 							${createListContent(list.cards)}
 						</div>
 						<div class="kanban-list-footer">
-							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Eine weitere Karte hinzufügen</button>
+							<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Add new Card</button>
 						</div>
 					</div>
 				`;
@@ -179,49 +179,6 @@
 		
 		return new kanbanboard(this,options);
 
-	};
-	
-	class Color {
-
-		  constructor(hex) {
-			
-		  }
-
-		  r = 1;
-		  g = 1;
-		  b = 1;
-
-		  copy(color) {
-			
-		  }
-
-		  setRGB(r, g, b) {
-			
-		  }
-
-		  setHSV(h, s, v) {
-			
-		  }
-
-		}
-	
-	$.fn.jqueryKanban2 = function(options){
-		
-		
-		
-		return new Color();
-		
-	}
-	
-	$.fn.addCard = function(options){
-		
-		console.log(this[0]);
-		
-		console.log(this[0] instanceof Color);
-		//console.log(this instanceof kanbanboard);
-		
-		console.log(this);
-		
 	};
 
 }(jQuery));
