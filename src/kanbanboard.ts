@@ -1,10 +1,12 @@
 export interface IKanbanboard {
     lists: Array<List>;
+    clickCardHandler: Function;
 }
 
 export class Kanbanboard implements IKanbanboard {
     
     lists: Array<List>;
+    clickCardHandler: Function;
 
     constructor(initData: IKanbanboard){
         this.lists = new Array<List>();
@@ -12,6 +14,15 @@ export class Kanbanboard implements IKanbanboard {
         for(let list in initData.lists){
             this.lists.push(new List(initData.lists[list]));
         }
+
+        // handler
+        $(function(){
+            $('.kanban-item').click(function(e){
+                if(initData.clickCardHandler !== undefined) {
+                    initData.clickCardHandler(e);
+                }
+            });
+        });
 
     }
 
