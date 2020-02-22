@@ -11,8 +11,13 @@
         <p id="greeting">Loading ...</p>
 
         <script
-  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+
+  <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
 
 		<script src="bundle.js"></script>
@@ -105,7 +110,7 @@ var kanbanList = [{
 
         $( document ).ready(function() {
             var kanbanboard = $('#kanbanboard').kanbanboard({
-			'lists':kanbanList,/*
+			'lists':kanbanList,
 			"sortListHandler": function(e) {
 				alert("sortList");
 			},
@@ -117,7 +122,7 @@ var kanbanList = [{
 			},
 			"clickFooterButtonHandler": function(e) {
 				alert("footerbutton");
-			},*/
+			},
 			"clickCardHandler": function(e) {
 				alert("cardhandler");
 			}
