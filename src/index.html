@@ -2,7 +2,9 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>Hello World!</title>
+		<title>Hello World!</title>
+		<link href="libs/fontawesome/css/all.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <div id="kanbanboard"></div>
@@ -13,7 +15,7 @@
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
   crossorigin="anonymous"></script>
 
-        <script src="bundle.js"></script>
+		<script src="bundle.js"></script>
 
         <script>
 
@@ -33,7 +35,7 @@ var kanbanList = [{
 				},
 				{
 					"title":"You can attach pictures and files.",
-					"customIcons": [{"icon":'<i class="fas fa-user-plus"></i>',"text":"123"}]
+					"icons": [{"icon":'<i class="fas fa-user-plus"></i>',"text":"123"}]
 				},
 				{
 					"title":"You can attach pictures and files.",
@@ -102,11 +104,24 @@ var kanbanList = [{
         });*/
 
         $( document ).ready(function() {
-            //var kanbanboardObj = {"lists":kanbanList};
-        //var kanbanboard = new Kanbanboard(kanbanboardObj);
-        $('#kanbanboard').kanbanboard({
-			'lists':kanbanList
-		});
+            var kanbanboard = $('#kanbanboard').kanbanboard({
+			'lists':kanbanList/*,
+			"sortListHandler": function(e) {
+				alert("sortList");
+			},
+			"sortCardHandler": function(event,ui) {
+				alert("sortCard");
+			},
+			"clickHeaderButtonHandler": function(e) {
+				alert("headerbutton");
+			},
+			"clickFooterButtonHandler": function(e) {
+				alert("footerbutton");
+			},
+			"clickCardHandler": function(e) {
+				alert("cardhandler");
+			}*/
+        });
 		
 		//console.log(test123);
 
