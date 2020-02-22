@@ -1,7 +1,7 @@
 //import { sayHello } from './greet';
 //import { Greeter } from './kanbanboard';
 import * as $ from "jquery";
-import { Kanbanboard } from './kanbanboard';
+//import { Kanbanboard } from './kanbanboard';
 
 /*interface FooOptions {
     color?: string
@@ -24,21 +24,28 @@ import { Kanbanboard } from './kanbanboard';
   }*/
 
 interface KanbanboardOptions {
-    kanbanboard:object;
+    kanbanboard?:JQuery;
 }
 
 declare global {
     interface JQuery {
-        kanbanboard(options:KanbanboardOptions): JQuery
+        kanbanboard(options?:KanbanboardOptions): JQuery
     }
 }
 
+(function($) {
 $.fn.kanbanboard = function(options){
     
     console.log(options);
     return this;
 
 };
+})(jQuery);
+
+//declare var test123:string;
+//test123 = "test12345";
+
+//$('body').css('background-color','red');
 
 function showHello(divName: string, name: string) {
     const elt = document.getElementById(divName);
