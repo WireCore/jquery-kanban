@@ -1,5 +1,5 @@
-import { Icon } from "icon";
-import { Label } from "label";
+import { Icon } from "./icon";
+import { Label } from "./label";
 
 interface ICard {
     title: string;

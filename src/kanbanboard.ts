@@ -1,4 +1,4 @@
-import { List } from "list";
+import { List } from "./list";
 
 export interface IKanbanboard {
     lists: Array<List>;
