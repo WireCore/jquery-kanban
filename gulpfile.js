@@ -4,9 +4,16 @@ var source = require('vinyl-source-stream');
 var watchify = require('watchify');
 var tsify = require('tsify');
 var fancy_log = require('fancy-log');
+var sass = require('gulp-sass');
 var paths = {
     pages: ['src/*.html']
 };
+
+gulp.task('sass', function(){
+    return gulp.src('src/style.scss')
+      .pipe(sass())
+      .pipe(gulp.dest('dist'))
+});
 
 var watchedBrowserify = watchify(browserify({
     basedir: '.',
@@ -29,6 +36,6 @@ function bundle() {
         .pipe(gulp.dest('dist'));
 }
 
-gulp.task('default', gulp.series(gulp.parallel('copy-html'), bundle));
+gulp.task('default', gulp.series(gulp.parallel('copy-html'), bundle)); // gulp.watch('./src/*.scss',gulp.series("sass"))
 watchedBrowserify.on('update', bundle);
 watchedBrowserify.on('log', fancy_log);
