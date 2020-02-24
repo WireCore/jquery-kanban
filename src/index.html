@@ -14,6 +14,7 @@
 <button onClick="deleteCard();">Delete Card</button>
 <button onClick="addList();">Add List</button>
 <button onClick="editList();">Edit List</button>
+<button onClick="deleteList();">Delete List</button>
 <button onClick="testdeleteblabla();">Test delete</button>
         <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -138,12 +139,6 @@ var kanbanList = [{
 			});
 		}
 
-		function editList(){
-			$(kanbanboard.lists[0]).editList({
-				"title":"Welcome to Wirecore"
-			});
-		}
-
 		function editCard(){
 			$(kanbanboard.lists[0].cards[0]).editCard({
 				"title":"Welcome to Wirecore",
@@ -163,6 +158,18 @@ var kanbanList = [{
 				"title":"bla"
 			});
 
+		}
+
+		function editList(){
+			$(kanbanboard.lists[0]).editList({
+				"title":"Welcome to Wirecore"
+			});
+		}
+
+		function deleteList(){
+			$(kanbanboard).deleteList({
+				"list":kanbanboard.lists[0]
+			});
 		}
 
 		function testdeleteblabla(){
