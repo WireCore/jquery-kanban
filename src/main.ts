@@ -25,7 +25,7 @@ declare global {
 
 (function($) {
   $.fn.kanbanboard = function(options){
-    var kanban = new Kanbanboard(this,<IKanbanboard> options);
+    var kanban = new Kanbanboard(<IKanbanboard> options);
     this.append(kanban.render());
     return kanban;
   };
@@ -40,7 +40,7 @@ declare global {
     var board:Kanbanboard = this[0];
     var html = board.addList(<IList> options);
 
-    $(board.htmlObject).find(".kanbanboard-container").append(html);
+    //$(board.htmlObject).find(".kanbanboard-container").append(html);
 
     return board;
   };
@@ -53,10 +53,7 @@ declare global {
     }
     
     var board:Kanbanboard = this[0];
-    var html = board.lists[options.list].addCard(<ICard> options.card);
-    
-    var htmlLists = $(board.htmlObject).find(".kanbanboard-list");
-    $(htmlLists[options.list]).find(".kanban-list-content").append(html);
+    board.lists[options.list].addCard(<ICard> options.card);
 
     return this;
   };

@@ -10,6 +10,7 @@ export interface ICard {
 
 export class Card implements ICard {
 
+    htmlElement: HTMLElement;
     title: string;
     image: string;
     icons: Array<Icon>;
@@ -34,7 +35,7 @@ export class Card implements ICard {
 
     render(){
 
-        var cardHtml = `
+        var cardDOM = document.createRange().createContextualFragment(`
             <div class="kanban-item">
                 ${this.renderImage()}
                 <div class="kanban-item-row">
@@ -45,9 +46,10 @@ export class Card implements ICard {
                     ${this.renderIcons()}
                 </div>
             </div>
-        `;
+        `);
 
-        return cardHtml;
+		return cardDOM;
+
     }
 
     renderImage(){

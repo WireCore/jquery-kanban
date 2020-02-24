@@ -8,6 +8,7 @@ export interface IList {
 
 export class List implements IList {
 
+    htmlElement: HTMLElement;
     title: string;
     cards: Array<Card>;
 
@@ -25,43 +26,48 @@ export class List implements IList {
     addCard(card:ICard){
         var newCard:Card = new Card(card);
         this.cards.push(newCard);
-        return newCard.render();
+        this.htmlElement.append(newCard.render());
     }
 
     render(){
 
-        var listHtml = `
-			<div class="kanbanboard-list">
-				<div class="kanban-list-header">
-					<div class="kanban-list-title">
-						${this.title}
-					</div>
-					<div class="kanban-list-header-button">
-						<button class="kanban-list-button"><i class="fas fa-ellipsis-h"></i></button>
-					</div>
-				</div>
-				<div class="kanban-list-content">
-					${this.createListContent()}
-				</div>
-				<div class="kanban-list-footer">
-					<button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Add new Card</button>
-				</div>
-			</div>
-		`;
+        var listDOM = document.createRange().createContextualFragment(`
+            <div class="kanbanboard-list">
+                <div class="kanban-list-header">
+                    <div class="kanban-list-title">
+                        ${this.title}
+                    </div>
+                    <div class="kanban-list-header-button">
+                        <button class="kanban-list-button"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
+                </div>
+                <div class="kanban-list-content">
+                </div>
+                <div class="kanban-list-footer">
+                    <button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Add new Card</button>
+                </div>
+            </div>
+        `);
 
-		return listHtml;
+		listDOM.querySelector(".kanban-list-content").appendChild(this.createListContent());
+
+		return listDOM;
 
     }
 
     createListContent(){
 
-        var cardsHtml: string = "";
+        var container: HTMLElement = document.createElement("div");
+		container.className = "kanban-list-content";
 
-        for(let card in this.cards){
-            cardsHtml += this.cards[card].render();
-        }
+		for(let card in this.cards){
+			container.append(this.cards[card].render());
+		}
+		
+		this.htmlElement = container;
 
-        return cardsHtml;
+		return container;
+
     }
 
 }

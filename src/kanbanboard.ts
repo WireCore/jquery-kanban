@@ -1,7 +1,6 @@
 import { List, IList } from "./list";
 
 export interface IKanbanboard {
-	htmlObject: HTMLElement;
     lists: Array<List>;
     clickCardHandler: Function;
     clickFooterButtonHandler: Function;
@@ -12,7 +11,7 @@ export interface IKanbanboard {
 
 export class Kanbanboard implements IKanbanboard {
 	
-	htmlObject: HTMLElement;
+	htmlElement: HTMLElement;
     lists: Array<List>;
     clickCardHandler: Function;
     clickFooterButtonHandler: Function;
@@ -20,9 +19,7 @@ export class Kanbanboard implements IKanbanboard {
     sortCardHandler: Function;
 	sortListHandler: Function;
 
-    constructor(htmlObject: HTMLElement,initData: IKanbanboard){
-
-		this.htmlObject = htmlObject;
+    constructor(initData: IKanbanboard){
 
         this.lists = new Array<List>();
 
@@ -75,40 +72,38 @@ export class Kanbanboard implements IKanbanboard {
 
     render(){
 
-        var kanbanboardHtml:string = `
+		var kanbanboardDOM = document.createRange().createContextualFragment(`
 			<div class="kanbanboard">
 				<div class="kanbanboard-inline">
-					<div class="kanbanboard-container">
-                        ${this.createLists()}
-					</div>
 				</div>
 			</div>
-		`;
-		
-		return kanbanboardHtml;
+		`);
+
+		kanbanboardDOM.querySelector(".kanbanboard-inline").appendChild(this.createLists());
+
+		return kanbanboardDOM;
 
     }
 
     createLists(){
 
-        var lists: string = "";
+		var container: HTMLElement = document.createElement("div");
+		container.className = "kanbanboard-container";
 
-        for(let list in this.lists){
-            lists += this.lists[list].render();
-        }
+		for(let list in this.lists){
+			container.append(this.lists[list].render());
+		}
+		
+		this.htmlElement = container;
 
-        return lists;
+		return container;
 
 	}
 	
 	addList(list:IList){
 		var newList:List = new List(list);
 		this.lists.push(newList);
-		return newList.render();
-
-		/*this.lists.push(new List(list));
-		$(this.htmlObject).empty();
-		$(this.htmlObject).append(this.render());*/
+		this.htmlElement.appendChild(newList.render());
 	}
 
 }
