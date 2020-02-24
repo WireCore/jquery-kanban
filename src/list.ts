@@ -23,7 +23,9 @@ export class List implements IList {
     }
 
     addCard(card:ICard){
-        this.cards.push(new Card(card));
+        var newCard:Card = new Card(card);
+        this.cards.push(newCard);
+        return newCard.render();
     }
 
     render(){

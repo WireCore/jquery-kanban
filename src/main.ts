@@ -38,7 +38,10 @@ declare global {
     }
 
     var board:Kanbanboard = this[0];
-    board.addList(<IList> options);
+    var html = board.addList(<IList> options);
+
+    $(board.htmlObject).find(".kanbanboard-container").append(html);
+
     return board;
   };
 
@@ -50,9 +53,10 @@ declare global {
     }
     
     var board:Kanbanboard = this[0];
-    board.lists[options.list].addCard(<ICard> options.card);
-    $(board.htmlObject).empty();
-		$(board.htmlObject).append(board.render());
+    var html = board.lists[options.list].addCard(<ICard> options.card);
+    
+    var htmlLists = $(board.htmlObject).find(".kanbanboard-list");
+    $(htmlLists[options.list]).find(".kanban-list-content").append(html);
 
     return this;
   };

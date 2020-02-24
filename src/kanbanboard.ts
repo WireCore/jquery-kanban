@@ -102,9 +102,13 @@ export class Kanbanboard implements IKanbanboard {
 	}
 	
 	addList(list:IList){
-		this.lists.push(new List(list));
+		var newList:List = new List(list);
+		this.lists.push(newList);
+		return newList.render();
+
+		/*this.lists.push(new List(list));
 		$(this.htmlObject).empty();
-		$(this.htmlObject).append(this.render());
+		$(this.htmlObject).append(this.render());*/
 	}
 
 }
