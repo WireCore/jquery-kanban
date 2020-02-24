@@ -33,22 +33,38 @@ export class Card implements ICard {
 
     }
 
+    patch(options:ICard){
+        // title
+        this.title = options.title;
+        $(this.htmlElement).find(".kanban-item-row-title").html(this.title);
+        // image
+        this.image = options.image;
+        $(this.htmlElement).find(".kanban-item-row-image").html(this.renderImage());
+    }
+
     render(){
 
+        var container: HTMLElement = document.createElement("div");
+		container.className = "kanban-item";
+
         var cardDOM = document.createRange().createContextualFragment(`
-            <div class="kanban-item">
+            <div class="kanban-item-row kanban-item-row-image">
                 ${this.renderImage()}
-                <div class="kanban-item-row">
-                    ${this.renderLabels()}
-                </div>
+            </div>
+            <div class="kanban-item-row">
+                ${this.renderLabels()}
+            </div>
+            <div class="kanban-item-row kanban-item-row-title">
                 ${this.title}
-                <div class="kanban-item-row">
-                    ${this.renderIcons()}
-                </div>
+            </div>
+            <div class="kanban-item-row">
+                ${this.renderIcons()}
             </div>
         `);
 
-		return cardDOM;
+        container.append(cardDOM);
+        this.htmlElement = container;
+		return container;
 
     }
 
@@ -58,9 +74,7 @@ export class Card implements ICard {
 
         if(this.image){
             imageHtml = `
-                <div class="kanban-item-row">
-                    <img src="${this.image}" class="kanban-item-image" />
-                </div>
+                <img src="${this.image}" class="kanban-item-image" />
             `;
         }
 

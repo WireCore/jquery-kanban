@@ -10,7 +10,10 @@
 		<div id="kanbanboard"></div>
 		<div id="testdelete"></div>
 <button onClick="addCard();">Add cArd</button>
+<button onClick="editCard();">Edit Card</button>
+<button onClick="deleteCard();">Delete Card</button>
 <button onClick="addList();">Add List</button>
+<button onClick="editList();">Edit List</button>
 <button onClick="testdeleteblabla();">Test delete</button>
         <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -130,11 +133,27 @@ var kanbanList = [{
 		});
 		
 		function addCard(){
-			$(kanbanboard).addCard({
-				"list":2,
-				"card":{
-					"title":"Welcome to Trello"
-				}
+			$(kanbanboard.lists[0]).addCard({
+				"title":"Welcome to Trello"
+			});
+		}
+
+		function editList(){
+			$(kanbanboard.lists[0]).editList({
+				"title":"Welcome to Wirecore"
+			});
+		}
+
+		function editCard(){
+			$(kanbanboard.lists[0].cards[0]).editCard({
+				"title":"Welcome to Wirecore",
+				"image":"images/test2.jpg"
+			});
+		}
+
+		function deleteCard(){
+			$(kanbanboard.lists[0]).deleteCard({
+				"card":kanbanboard.lists[0].cards[1]
 			});
 		}
 

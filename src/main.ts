@@ -10,8 +10,19 @@ interface AddListOptions {
   list?:JQuery;
 }
 
+interface EditListOptions {
+  list?:List;
+}
+
 interface AddCardOptions {
-  list?:number;
+  card?:Card;
+}
+
+interface EditCardOptions {
+  card?:Card;
+}
+
+interface DeleteCardOptions {
   card?:Card;
 }
 
@@ -19,7 +30,10 @@ declare global {
     interface JQuery {
         kanbanboard(options?:KanbanboardOptions): Kanbanboard;
         addList(options?:AddListOptions):Kanbanboard;
-        addCard(options?:AddCardOptions):Kanbanboard;
+        editList(options?:EditListOptions):Kanbanboard;
+        addCard(options?:AddCardOptions):Kanbanboard; 
+        editCard(options?:EditCardOptions):Kanbanboard;
+        deleteCard(options?:DeleteCardOptions):Kanbanboard;
     }
 }
 
@@ -38,24 +52,71 @@ declare global {
     }
 
     var board:Kanbanboard = this[0];
-    var html = board.addList(<IList> options);
-
-    //$(board.htmlObject).find(".kanbanboard-container").append(html);
+    board.addList(<IList> options);
 
     return board;
+  };
+
+  $.fn.editList = function(options){
+
+    // wrong object check
+    if(!(this[0] instanceof List)){
+      throw new Error('Invalid variable. Expected Kanbanboard List object');
+    }
+    
+    var list:List = this[0];
+    list.patch(<IList> options);
+
+    return this;
+
   };
 
   $.fn.addCard = function(options){
 
     // wrong object check
-    if(!(this[0] instanceof Kanbanboard)){
-      throw new Error('Invalid variable. Expected Kanbanboard object');
+    if(!(this[0] instanceof List)){
+      throw new Error('Invalid variable. Expected Kanbanboard List object');
     }
-    
-    var board:Kanbanboard = this[0];
-    board.lists[options.list].addCard(<ICard> options.card);
+
+    var list:List = this[0];
+    list.addCard(<ICard> options);
 
     return this;
+
+  };
+
+  $.fn.editCard = function(options){
+
+    // wrong object check
+    if(!(this[0] instanceof Card)){
+      throw new Error('Invalid variable. Expected Kanbanboard List object');
+    }
+
+    var card:Card = this[0];
+    card.patch(<ICard> options);
+
+    return this;
+
+  };
+
+  $.fn.deleteCard = function(options){
+
+    // wrong object check
+    if(!(this[0] instanceof List)){
+      throw new Error('Invalid variable. Expected Kanbanboard List object');
+    }
+
+    var list:List = this[0];
+
+    $(options.card.htmlElement).remove();
+
+    var cardIndex = list.cards.indexOf(options.card);
+    if(cardIndex > -1){
+      list.cards.splice(cardIndex, 1);
+    }
+
+    return this;
+
   };
 
 })(jQuery);
