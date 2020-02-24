@@ -15,7 +15,6 @@
 <button onClick="addList();">Add List</button>
 <button onClick="editList();">Edit List</button>
 <button onClick="deleteList();">Delete List</button>
-<button onClick="testdeleteblabla();">Test delete</button>
         <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -119,17 +118,6 @@ var kanbanList = [{
 				}
 
 			});
-				
-			testdelete = document.createElement("ul");                 // Create a <li> node
-			testdeleteLI1 = document.createElement("li");
-			testdeleteLI2 = document.createElement("li");
-			var textnode1 = document.createTextNode("Water 1");         // Create a text node
-			var textnode2 = document.createTextNode("Water 2");
-			testdeleteLI1.appendChild(textnode1);                              // Append the text to <li>
-			testdeleteLI2.appendChild(textnode2);
-			testdelete.appendChild(testdeleteLI1);
-			testdelete.appendChild(testdeleteLI2);
-			document.getElementById("testdelete").appendChild(testdelete);     // Append <li> to <ul> with id="myList"
 
 		});
 		
@@ -171,25 +159,6 @@ var kanbanList = [{
 				"list":kanbanboard.lists[0]
 			});
 		}
-
-		function testdeleteblabla(){
-			
-			console.log(kanbanboard.lists[0].htmlElement);
-			kanbanboard.lists[0].htmlElement.remove();
-			//console.log(kanbanboard.htmlObject);
-			//kanbanboard.htmlObject.remove();
-			//$(kanbanboard.htmlObject).remove();
-			
-			//console.log(kanbanboard);
-			//console.log(kanbanboard.lists[0].htmlElement);
-			//kanbanboard.lists[0].htmlElement.remove();
-			
-			//$(kanbanboard.lists[0].htmlElement).remove();
-			//testdeleteLI2.remove();
-			//document.getElementById("testdelete").remove();
-		}
-
-        
 
         </script>
 

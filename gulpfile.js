@@ -36,6 +36,6 @@ function bundle() {
         .pipe(gulp.dest('dist'));
 }
 
-gulp.task('default', gulp.series(gulp.parallel('copy-html'), bundle)); // gulp.watch('./src/*.scss',gulp.series("sass"))
+gulp.task('default', gulp.series(gulp.parallel(['copy-html','sass']), bundle)); // gulp.watch('./src/*.scss',gulp.series("sass"))
 watchedBrowserify.on('update', bundle);
 watchedBrowserify.on('log', fancy_log);
