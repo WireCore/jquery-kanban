@@ -1,6 +1,7 @@
-import { Card } from "./card";
+import { Card, ICard } from "./card";
+import { Icon } from "./icon";
 
-interface IList {
+export interface IList {
     title: string;
     cards: Array<Card>;
 }
@@ -21,8 +22,12 @@ export class List implements IList {
 
     }
 
+    addCard(card:ICard){
+        this.cards.push(new Card(card));
+    }
+
     render(){
-        
+
         var listHtml = `
 			<div class="kanbanboard-list">
 				<div class="kanban-list-header">
@@ -41,7 +46,7 @@ export class List implements IList {
 				</div>
 			</div>
 		`;
-		
+
 		return listHtml;
 
     }

@@ -8,8 +8,7 @@
     </head>
     <body>
         <div id="kanbanboard"></div>
-        <p id="greeting">Loading ...</p>
-
+<button onClick="addCard();">Add cArd</button>
         <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -23,6 +22,8 @@
 		<script src="bundle.js"></script>
 
         <script>
+
+			var kanbanboard = null;
 
 var kanbanList = [{
 			"title":"Basics",
@@ -88,49 +89,42 @@ var kanbanList = [{
 				}
 			]
 		}];
-		
-		/*var kanbanboard = $('#kanbanboard').jqueryKanban({
-			'lists':kanbanList,
-			"sortListHandler": function(e) {
-				alert("sortList");
-			},
-			"sortCardHandler": function(event,ui) {
-				alert("sortCard");
-			},
-			"clickHeaderButtonHandler": function(e) {
-				alert("headerbutton");
-			},
-			"clickFooterButtonHandler": function(e) {
-				alert("footerbutton");
-			},
-			"clickCardHandler": function(e) {
-				alert("cardhandler");
-			}
-        });*/
 
         $( document ).ready(function() {
-            var kanbanboard = $('#kanbanboard').kanbanboard({
-			'lists':kanbanList,
-			"sortListHandler": function(e) {
-				alert("sortList");
-			},
-			"sortCardHandler": function(event,ui) {
-				alert("sortCard");
-			},
-			"clickHeaderButtonHandler": function(e) {
-				alert("headerbutton");
-			},
-			"clickFooterButtonHandler": function(e) {
-				alert("footerbutton");
-			},
-			"clickCardHandler": function(e) {
-				alert("cardhandler");
-			}
-        });
-		
-		//console.log(test123);
+            kanbanboard = $('#kanbanboard').kanbanboard({
+				'lists':kanbanList,
+				"sortListHandler": function(e) {
+					alert("sortList");
+				},
+				"sortCardHandler": function(event,ui) {
+					alert("sortCard");
+				},
+				"clickHeaderButtonHandler": function(e) {
+					alert("headerbutton");
+				},
+				"clickFooterButtonHandler": function(e) {
+					alert("footerbutton");
+				},
+				"clickCardHandler": function(e) {
+					alert("cardhandler");
+				}
 
-        });
+       	 	});
+		
+			$(kanbanboard).addList({
+				"title":"bla"
+			});
+
+		});
+		
+		function addCard(){
+			$(kanbanboard).addCard({
+				"list":2,
+				"card":{
+					"title":"Welcome to Trello"
+				}
+			});
+		}
 
         
 

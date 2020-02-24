@@ -1,7 +1,7 @@
 import { Icon } from "./icon";
 import { Label } from "./label";
 
-interface ICard {
+export interface ICard {
     title: string;
     image: string;
     icons: Array<Icon>;

@@ -1,6 +1,7 @@
-import { List } from "./list";
+import { List, IList } from "./list";
 
 export interface IKanbanboard {
+	htmlObject: HTMLElement;
     lists: Array<List>;
     clickCardHandler: Function;
     clickFooterButtonHandler: Function;
@@ -10,15 +11,19 @@ export interface IKanbanboard {
 }
 
 export class Kanbanboard implements IKanbanboard {
-    
+	
+	htmlObject: HTMLElement;
     lists: Array<List>;
     clickCardHandler: Function;
     clickFooterButtonHandler: Function;
     clickHeaderButtonHandler: Function;
     sortCardHandler: Function;
-    sortListHandler: Function;
+	sortListHandler: Function;
 
-    constructor(initData: IKanbanboard){
+    constructor(htmlObject: HTMLElement,initData: IKanbanboard){
+
+		this.htmlObject = htmlObject;
+
         this.lists = new Array<List>();
 
         for(let list in initData.lists){
@@ -94,6 +99,12 @@ export class Kanbanboard implements IKanbanboard {
 
         return lists;
 
-    }
+	}
+	
+	addList(list:IList){
+		this.lists.push(new List(list));
+		$(this.htmlObject).empty();
+		$(this.htmlObject).append(this.render());
+	}
 
 }
