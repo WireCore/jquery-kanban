@@ -3,6 +3,12 @@ import { Card, ICard } from "./card";
 export interface IList {
     title: string;
     cards: Array<Card>;
+    options: Array<IListOption>
+}
+
+interface IListOption {
+    text: string;
+    callback: Function;
 }
 
 export class List implements IList {
@@ -10,14 +16,21 @@ export class List implements IList {
     htmlElement: HTMLElement;
     title: string;
     cards: Array<Card>;
+    options: Array<IListOption>;
 
     constructor(initData: IList){
         this.title = initData.title;
         this.cards = new Array<Card>();
+        this.options = new Array<IListOption>();
 
         // cards
         for(let card in initData.cards){
             this.cards.push(new Card(initData.cards[card]));
+        }
+
+        // options
+        for(let option in initData.options){
+            this.options.push(<IListOption> initData.options[option]);
         }
 
     }
@@ -46,6 +59,7 @@ export class List implements IList {
                 </div>
                 <div class="kanban-list-header-button">
                     <button class="kanban-list-button"><i class="fas fa-ellipsis-h"></i></button>
+                    <!-- options -->
                 </div>
             </div>
             ${this.createListContent()}
@@ -54,9 +68,26 @@ export class List implements IList {
             </div>
         `);
 
+        $(listDOM).find(".kanban-list-header-button").append(this.createListOptions());
         container.append(listDOM);
         this.htmlElement = container;
 		return container;
+
+    }
+
+    createListOptions(){
+
+        var container: HTMLElement = document.createElement("div");
+		container.className = "kanban-list-header-button-dropdown";
+
+        for(let option in this.options){
+            var p: HTMLElement = document.createElement("p");
+            p.append(this.options[option].text);
+            p.addEventListener("click",(e:Event) => this.options[option].callback());
+            container.append(p);
+        }
+
+        return container;
 
     }
 

@@ -33,6 +33,27 @@
 			var testdeleteLI1 = null;
 			var testdeleteLI2 = null;
 
+			var listoptions = [
+				{
+					"text":"option 1",
+					"callback": function(e) {
+						alert("option 1 callback");
+					}
+				},
+				{
+					"text":"option 2",
+					"callback": function(e) {
+						alert("option 2 callback");
+					}
+				},
+				{
+					"text":"option 3",
+					"callback": function(e) {
+						alert("option 3 callback");
+					}
+				}
+			];
+
 var kanbanList = [{
 			"title":"Basics",
 			"cards": [
@@ -55,7 +76,8 @@ var kanbanList = [{
 					"title":"You can attach pictures and files.",
 					"customIcons": [{"icon":'<i class="fas fa-user-plus"></i>',"text":"123"}]
 				}
-			]
+			],
+			"options": listoptions
 		},
 		{
 			"title":"Basics",
@@ -106,9 +128,6 @@ var kanbanList = [{
 				},
 				"sortCardHandler": function(event,ui) {
 					alert("sortCard");
-				},
-				"clickHeaderButtonHandler": function(e) {
-					alert("headerbutton");
 				},
 				"clickFooterButtonHandler": function(e) {
 					alert("footerbutton");

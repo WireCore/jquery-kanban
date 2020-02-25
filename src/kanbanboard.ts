@@ -39,11 +39,6 @@ export class Kanbanboard implements IKanbanboard {
 					initData.clickCardHandler(e);
 				}
 			});
-			$('.kanban-list-header-button').click(function(e){
-				if(initData.clickHeaderButtonHandler !== undefined) {
-					initData.clickHeaderButtonHandler(e);
-				}
-			});
 		});
 		
 		$(function(){
