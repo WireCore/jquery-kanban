@@ -196,3 +196,9 @@ $kanbanboardListBorder: "2px solid grey";
 .kanban-list-header-button:hover .kanban-list-header-button-dropdown {
 	display: block;
 }
+
+.kanbanboard-sortable-placeholder {
+	background-color: #bababa;
+	margin: 0.25em;
+	border-radius: 5px;
+}

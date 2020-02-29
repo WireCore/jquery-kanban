@@ -44,6 +44,8 @@ export class Kanbanboard implements IKanbanboard {
 		$(function(){
 			$(".kanbanboard-list").sortable({
 				items: ".kanban-item",
+				placeholder: "kanbanboard-sortable-placeholder",
+				forcePlaceholderSize: true,
 				update: function(event,ui){
 					if(initData.sortCardHandler !== undefined) {
 						initData.sortCardHandler(event,ui);
@@ -54,6 +56,8 @@ export class Kanbanboard implements IKanbanboard {
 			$(".kanbanboard-container").sortable({
 				items: ".kanbanboard-list",
 				handle: ".kanban-list-header",
+				placeholder: "kanbanboard-sortable-placeholder",
+				forcePlaceholderSize: true,
 				update: function(event,ui){
 					if(initData.sortListHandler !== undefined) {
 						initData.sortListHandler(event,ui);

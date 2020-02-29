@@ -24,6 +24,11 @@ gulp.task('css',function(){
     .pipe(gulp.dest('./dist/'))
 });
 
+gulp.task('copy-html', function () {
+    return gulp.src(paths.pages)
+        .pipe(gulp.dest('dist'));
+});
+
 var watchedBrowserify = watchify(browserify({
     basedir: '.',
     debug: true,
@@ -40,8 +45,9 @@ function bundle() {
         .pipe(gulp.dest('dist'));
 }
 
-gulp.task('default',gulp.series(gulp.parallel(['sass']),gulp.parallel(['css']),bundle,(done) => {
+gulp.task('default',gulp.series(gulp.parallel(['copy-html','sass']),gulp.parallel(['css']),bundle,(done) => {
     
+    gulp.watch('./src/index.html',gulp.series('copy-html'))
     gulp.watch('./src/style.scss',gulp.series('sass','css'));
     gulp.watch('./src/*.ts',gulp.series(bundle));
 
