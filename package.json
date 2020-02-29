@@ -22,6 +22,7 @@
     "watchify": "^3.11.1"
   },
   "dependencies": {
+    "gulp-uglifycss": "^1.1.0",
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1"
   }
