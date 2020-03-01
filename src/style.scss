@@ -202,3 +202,15 @@ $kanbanboardListBorder: "2px solid grey";
 	margin: 0.25em;
 	border-radius: 5px;
 }
+
+.kanban-list-footer-addItemContainer {
+	padding: 5px 11px 5px 5px;
+	display: none;
+}
+
+.kanban-list-footer-addItem-Container-textarea {
+	resize: vertical; 
+	max-height: 150px; 
+	width: 100%; 
+	min-height: 60px
+}

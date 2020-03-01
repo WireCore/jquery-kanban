@@ -6,7 +6,8 @@ export interface IKanbanboard {
     clickFooterButtonHandler: Function;
     clickHeaderButtonHandler: Function;
     sortCardHandler: Function;
-    sortListHandler: Function;
+	sortListHandler: Function;
+	addCardEvent: Function;
 }
 
 export class Kanbanboard implements IKanbanboard {
@@ -18,22 +19,19 @@ export class Kanbanboard implements IKanbanboard {
     clickHeaderButtonHandler: Function;
     sortCardHandler: Function;
 	sortListHandler: Function;
+	addCardEvent: Function;
 
     constructor(initData: IKanbanboard){
 
         this.lists = new Array<List>();
 
         for(let list in initData.lists){
+			initData.lists[list].addCardEvent = initData.addCardEvent;
             this.lists.push(new List(initData.lists[list]));
         }
 
         // handler
 		$(function(){
-			$('.kanban-list-footer-button').click(function(e){
-				if(initData.clickFooterButtonHandler !== undefined) {
-					initData.clickFooterButtonHandler(e);
-				}
-			});
 			$('.kanban-item').click(function(e){
 				if(initData.clickCardHandler !== undefined) {
 					initData.clickCardHandler(e);

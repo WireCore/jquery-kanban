@@ -3,7 +3,8 @@ import { Card, ICard } from "./card";
 export interface IList {
     title: string;
     cards: Array<Card>;
-    options: Array<IListOption>
+    options: Array<IListOption>;
+    addCardEvent: Function;
 }
 
 interface IListOption {
@@ -17,11 +18,13 @@ export class List implements IList {
     title: string;
     cards: Array<Card>;
     options: Array<IListOption>;
+    addCardEvent: Function;
 
     constructor(initData: IList){
         this.title = initData.title;
         this.cards = new Array<Card>();
         this.options = new Array<IListOption>();
+        this.addCardEvent = initData.addCardEvent;
 
         // cards
         for(let card in initData.cards){
@@ -45,6 +48,7 @@ export class List implements IList {
         var newCard:Card = new Card(card);
         this.cards.push(newCard);
         $(this.htmlElement).find('.kanban-list-content').append(newCard.render());
+        return newCard;
     }
 
     render(){
@@ -66,14 +70,85 @@ export class List implements IList {
                 ${this.createListContent()}
             </div>
             <div class="kanban-list-footer">
-                <button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Add new Card</button>
+                <!-- footer button -->
+                <div class="kanban-list-footer-addItemContainer">
+                    <textarea class="kanban-list-footer-addItem-Container-textarea" placeholder="Enter Text"></textarea>
+                </div>
             </div>
         `);
 
         $(listDOM).find(".kanban-list-header-button").append(this.createListOptions());
+        $(listDOM).find(".kanban-list-footer").append(this.createFooterButtonOpenTextarea());
+        $(listDOM).find(".kanban-list-footer-addItemContainer").append(this.createFooterButtonAddCard());
+        $(listDOM).find(".kanban-list-footer-addItemContainer").append(this.createFooterButtonCancelAddCard());
+
+        // add textarea eventlistener
+        $(listDOM).find('.kanban-list-footer-addItem-Container-textarea').on("keypress", function(e:any) {
+            if(e.key === "Enter"){
+                this.addCardListenerFunction();
+                return false;
+            }
+        }.bind(this));
+
         container.append(listDOM);
         this.htmlElement = container;
+
 		return container;
+
+    }
+
+    addCardListenerFunction(){
+        var text = $(this.htmlElement).find('.kanban-list-footer-addItem-Container-textarea').val();
+        var card: ICard = <ICard>{"title":text};
+        var addedCard = this.addCard(card);
+        $(this.htmlElement).find('.kanban-list-footer-addItem-Container-textarea').val('');
+        $(this.htmlElement).find('.kanban-list-footer-addItem-Container-textarea').focus();
+        this.addCardEvent(addedCard);
+    }
+
+    createFooterButtonOpenTextarea(){
+
+        var button: HTMLElement = document.createElement("button");
+        $(button).append('<i class="fas fa-plus"></i> Add new Card');
+        button.classList.add("kanban-list-button");
+        button.classList.add("kanban-list-footer-button");
+        
+        // click listener
+        button.addEventListener("click",function(){
+            $(this).css('display','none');
+            $(this).parent().find(".kanban-list-footer-addItemContainer").css('display','block');
+            $(this).parent().find(".kanban-list-footer-addItem-Container-textarea").focus();
+        });
+
+        return button;
+
+    }
+
+    createFooterButtonCancelAddCard(){
+        
+        var button: HTMLElement = document.createElement("button");
+        $(button).append('<i class="fas fa-times"></i>');
+
+        // click listener
+        button.addEventListener("click",function(){
+            $(this).parent().css('display','none');
+            $(this).parent().parent().find('.kanban-list-footer-button').css('display','block');
+        });
+
+        return button;
+
+    }
+
+    createFooterButtonAddCard(){
+
+        var button: HTMLElement = document.createElement("button");
+        $(button).append("Add Card");
+
+        button.addEventListener("click",function(){
+            this.addCardListenerFunction();
+        }.bind(this));
+
+        return button;
 
     }
 
