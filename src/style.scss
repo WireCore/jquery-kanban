@@ -214,3 +214,12 @@ $kanbanboardListBorder: "2px solid grey";
 	width: 100%; 
 	min-height: 60px
 }
+
+.kanbanboard-addListButton-container {
+	display: none;
+}
+
+.kanbanbaord-addListButton-input {
+	width: 97%; 
+	margin: 2px;
+}

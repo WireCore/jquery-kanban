@@ -8,6 +8,7 @@ export interface IKanbanboard {
     sortCardHandler: Function;
 	sortListHandler: Function;
 	addCardEvent: Function;
+	addListEvent: Function;
 }
 
 export class Kanbanboard implements IKanbanboard {
@@ -20,10 +21,12 @@ export class Kanbanboard implements IKanbanboard {
     sortCardHandler: Function;
 	sortListHandler: Function;
 	addCardEvent: Function;
+	addListEvent: Function;
 
     constructor(initData: IKanbanboard){
 
-        this.lists = new Array<List>();
+		this.lists = new Array<List>();
+		this.addListEvent = initData.addListEvent;
 
         for(let list in initData.lists){
 			initData.lists[list].addCardEvent = initData.addCardEvent;
@@ -82,8 +85,59 @@ export class Kanbanboard implements IKanbanboard {
 
 		kanbanboardDOM.querySelector(".kanbanboard-inline").appendChild(this.createLists());
 
+		
+		$(kanbanboardDOM).find('.kanbanboard-container').append(this.createAddListButton());
+
 		return kanbanboardDOM;
 
+	}
+	
+	createAddListButton(){
+
+		var addListButtonDOM = document.createRange().createContextualFragment(`
+			<div class="kanbanboard-list">
+				<button class="kanbanboard-addListButtonOpen">Add List</button>
+				<div class="kanbanboard-addListButton-container">
+					<input type="text" class="kanbanbaord-addListButton-input" />
+					<button class="kanbanboard-addListButton">Add List</button>
+					<button class="kanbanboard-addListButtonCancel"><i class="fas fa-times"></i></button>
+				</div>
+			</div>
+		`);
+		
+		$(addListButtonDOM).find('.kanbanboard-addListButtonOpen').on("click", function(e:any) {
+			$(this).css('display','none');
+			$(this).parent().find(".kanbanboard-addListButton-container").css('display','block');
+			$(this).parent().find(".kanbanbaord-addListButton-input").focus();
+		});
+
+		$(addListButtonDOM).find('.kanbanbaord-addListButton-input').on("keypress", function(e:any) {
+            if(e.key === "Enter"){
+                this.addListListenerFunction();
+                return false;
+            }
+		}.bind(this));
+		
+		$(addListButtonDOM).find('.kanbanboard-addListButton').on("click", function(e:any) {
+			this.addListListenerFunction();
+		}.bind(this));
+
+		$(addListButtonDOM).find('.kanbanboard-addListButtonCancel').on("click",function(e:any){
+			$(this).parent().css('display','none');
+            $(this).parent().parent().find('.kanbanboard-addListButtonOpen').css('display','block');
+		});
+		
+		return addListButtonDOM;
+
+	}
+
+	addListListenerFunction(){
+		var text = $(this.htmlElement).find('.kanbanbaord-addListButton-input').val();
+		var list: IList = <IList>{"title":text};
+		var addedList = this.addList(list);
+		$(this.htmlElement).find('.kanbanbaord-addListButton-input').val('');
+		$(this.htmlElement).find('.kanbanbaord-addListButton-input').focus();
+		this.addListEvent(addedList);
     }
 
     createLists(){
@@ -104,7 +158,8 @@ export class Kanbanboard implements IKanbanboard {
 	addList(list:IList){
 		var newList:List = new List(list);
 		this.lists.push(newList);
-		this.htmlElement.appendChild(newList.render());
+		$(this.htmlElement).find(".kanbanboard-list")[$(this.htmlElement).find(".kanbanboard-list").length - 2].after(newList.render());
+		return newList;
 	}
 
 }
