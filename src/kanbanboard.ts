@@ -23,6 +23,7 @@ export class Kanbanboard implements IKanbanboard {
 
 		this.lists = new Array<List>();
 		this.addListEvent = initData.addListEvent;
+		this.sortCardHandler = initData.sortCardHandler;
 
         for(let list in initData.lists){
 			initData.lists[list].addCardEvent = initData.addCardEvent;
@@ -38,22 +39,11 @@ export class Kanbanboard implements IKanbanboard {
 			});
 		});
 		
+		$(document).ready(function(){
+			this.initSortableKanbanCards();
+		}.bind(this));
+
 		$(function(){
-			$(".kanban-list-content").sortable({
-				items: ".kanban-item",
-				placeholder: "kanbanboard-sortable-placeholder",
-				forcePlaceholderSize: true,
-				connectWith: ".kanban-list-content",
-				scroll: false,
-				helper: 'clone',
-				appendTo: 'body',
-				update: function(event,ui){
-					if(initData.sortCardHandler !== undefined) {
-						initData.sortCardHandler(event,ui);
-					}
-				}
-			});
-			$(".kanban-list-content").disableSelection();
 			$(".kanbanboard-container").sortable({
 				items: ".kanbanboard-list",
 				handle: ".kanban-list-header",
@@ -155,7 +145,28 @@ export class Kanbanboard implements IKanbanboard {
 		var newList:List = new List(list);
 		this.lists.push(newList);
 		$(this.htmlElement).find(".kanbanboard-list")[$(this.htmlElement).find(".kanbanboard-list").length - 2].after(newList.render());
+		this.initSortableKanbanCards();
 		return newList;
+	}
+
+	initSortableKanbanCards(){
+
+		$(".kanban-list-content").sortable({
+			items: ".kanban-item",
+			placeholder: "kanbanboard-sortable-placeholder",
+			forcePlaceholderSize: true,
+			connectWith: ".kanban-list-content",
+			scroll: false,
+			helper: 'clone',
+			appendTo: 'body',
+			update: function(event:any,ui:any){
+				if(this.sortCardHandler !== undefined) {
+					this.sortCardHandler(event,ui);
+				}
+			}.bind(this)
+		});
+		$(".kanban-list-content").disableSelection();
+
 	}
 
 }
