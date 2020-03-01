@@ -81,6 +81,11 @@ var kanbanList = [{
 		},
 		{
 			"title":"Basics",
+			"cards": [],
+			"options": listoptions
+		},
+		{
+			"title":"Basics",
 			"cards": [
 				{
 					"title":"This is a card.",
@@ -150,9 +155,6 @@ var kanbanList = [{
 				},
 				"sortCardHandler": function(event,ui) {
 					alert("sortCard");
-				},
-				"clickFooterButtonHandler": function(e) {
-					alert("footerbutton");
 				},
 				"clickCardHandler": function(e) {
 					alert("cardhandler");

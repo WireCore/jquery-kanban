@@ -73,7 +73,7 @@ $kanbanboardListBorder: "2px solid grey";
 }
 
 .kanban-list-content {
-	min-height: unset;
+	min-height: 10px;
 	position: relative;
 	overflow-y: auto;
 	overflow-anchor: none;

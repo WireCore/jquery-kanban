@@ -3,8 +3,6 @@ import { List, IList } from "./list";
 export interface IKanbanboard {
     lists: Array<List>;
     clickCardHandler: Function;
-    clickFooterButtonHandler: Function;
-    clickHeaderButtonHandler: Function;
     sortCardHandler: Function;
 	sortListHandler: Function;
 	addCardEvent: Function;
@@ -16,8 +14,6 @@ export class Kanbanboard implements IKanbanboard {
 	htmlElement: HTMLElement;
     lists: Array<List>;
     clickCardHandler: Function;
-    clickFooterButtonHandler: Function;
-    clickHeaderButtonHandler: Function;
     sortCardHandler: Function;
 	sortListHandler: Function;
 	addCardEvent: Function;
@@ -43,11 +39,11 @@ export class Kanbanboard implements IKanbanboard {
 		});
 		
 		$(function(){
-			$(".kanbanboard-list").sortable({
+			$(".kanban-list-content").sortable({
 				items: ".kanban-item",
 				placeholder: "kanbanboard-sortable-placeholder",
 				forcePlaceholderSize: true,
-				connectWith: ".kanbanboard-list",
+				connectWith: ".kanban-list-content",
 				scroll: false,
 				helper: 'clone',
 				appendTo: 'body',
@@ -57,7 +53,7 @@ export class Kanbanboard implements IKanbanboard {
 					}
 				}
 			});
-			$(".kanban-list").disableSelection();
+			$(".kanban-list-content").disableSelection();
 			$(".kanbanboard-container").sortable({
 				items: ".kanbanboard-list",
 				handle: ".kanban-list-header",
