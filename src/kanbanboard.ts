@@ -46,6 +46,10 @@ export class Kanbanboard implements IKanbanboard {
 				items: ".kanban-item",
 				placeholder: "kanbanboard-sortable-placeholder",
 				forcePlaceholderSize: true,
+				connectWith: ".kanbanboard-list",
+				scroll: false,
+				helper: 'clone',
+				appendTo: 'body',
 				update: function(event,ui){
 					if(initData.sortCardHandler !== undefined) {
 						initData.sortCardHandler(event,ui);

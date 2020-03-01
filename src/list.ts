@@ -44,7 +44,7 @@ export class List implements IList {
     addCard(card:ICard){
         var newCard:Card = new Card(card);
         this.cards.push(newCard);
-        this.htmlElement.append(newCard.render());
+        $(this.htmlElement).find('.kanban-list-content').append(newCard.render());
     }
 
     render(){
@@ -62,7 +62,9 @@ export class List implements IList {
                     <!-- options -->
                 </div>
             </div>
-            ${this.createListContent()}
+            <div class="kanban-list-content">
+                ${this.createListContent()}
+            </div>
             <div class="kanban-list-footer">
                 <button class="kanban-list-button kanban-list-footer-button"><i class="fas fa-plus"></i> Add new Card</button>
             </div>
@@ -82,6 +84,7 @@ export class List implements IList {
 
         for(let option in this.options){
             var p: HTMLElement = document.createElement("p");
+            p.style.margin = "0";
             p.append(this.options[option].text);
             p.addEventListener("click",(e:Event) => this.options[option].callback());
             container.append(p);
